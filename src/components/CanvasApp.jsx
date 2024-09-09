@@ -61,10 +61,21 @@ const CanvasApp = () => {
   const addText = () => {
     const newText = prompt('Enter text:');
     if (newText) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext('2d');
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const textWidth = ctx.measureText(newText).width;
+      const textHeight = fontSize; // Approximate height based on font size
+
       setHistory([...history, { text, font, fontSize, textPosition, textStyles, textAlign }]);
       setText(newText);
-    }
-  };
+      setTextPosition({
+        x: centerX - textWidth / 2,
+        y: centerY + textHeight / 2,
+    });
+  }
+};
 
   const changeFont = (e) => {
     setHistory([...history, { text, font, fontSize, textPosition, textStyles, textAlign }]);

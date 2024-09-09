@@ -1,3 +1,34 @@
+Things you must do if u wanna run this app:
+1. Open your terminal and run `npm install` so that all dependencies can be installed.
+
+
+2. Run `npm run start` to start the development server.
+
+
+3. The best thing you can do apart from these 2 above things is to check out my deployed version of this application at [Open Link](https://canvas-assignment-beta.vercel.app/).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

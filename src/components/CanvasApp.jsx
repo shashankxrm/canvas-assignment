@@ -39,7 +39,7 @@ const CanvasApp = () => {
     }
   }, [text, font, fontSize, textPosition, textStyles, textAlign]);
 
-  const handleMouseDown = (e) => {
+  const handleMouseDown = () => {
     setIsDragging(true);
   };
 
@@ -126,7 +126,7 @@ const CanvasApp = () => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 p-4">
       <UndoRedo onUndo={undo} onRedo={redo} />
       <div className="bg-gray-200 p-4 rounded shadow-md">
         <canvas
@@ -136,10 +136,10 @@ const CanvasApp = () => {
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           onMouseMove={handleMouseMove}
-          className="bg-white border border-gray-300 shadow-md"
+          className="bg-white border border-gray-300 shadow-md w-full h-auto"
         />
       </div>
-      <div className="flex justify-center space-x-4 mt-4">
+      <div className="flex flex-wrap justify-center space-x-4 mt-4">
         <FontDropdown font={font} onChangeFont={changeFont} className="w-35 h-12 flex items-center" />
         <FontSizeControl fontSize={fontSize} onIncrement={() => changeFontSize(1)} onDecrement={() => changeFontSize(-1)} onFontSizeChange={handleFontSizeChange} className="w-22 h-12 flex items-center" />
         <FontStyleToolbar textStyles={textStyles} toggleTextStyle={toggleTextStyle} toggleTextAlign={toggleTextAlign} className="w-35 h-12 flex items-center" />

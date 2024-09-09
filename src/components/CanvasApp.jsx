@@ -17,7 +17,7 @@ const CanvasApp = () => {
   const [textStyles, setTextStyles] = useState({
     bold: false,
     italic: false,
-    underline: false,
+    strikethrough: false,
   });
   const [textAlign, setTextAlign] = useState('center');
 
@@ -28,11 +28,11 @@ const CanvasApp = () => {
     ctx.font = `${textStyles.bold ? 'bold' : ''} ${textStyles.italic ? 'italic' : ''} ${fontSize}px ${font}`;
     ctx.textAlign = textAlign;
     ctx.fillText(text, textPosition.x, textPosition.y);
-    if (textStyles.underline) {
+    if (textStyles.strikethrough) {
       const textWidth = ctx.measureText(text).width;
       ctx.beginPath();
-      ctx.moveTo(textPosition.x, textPosition.y + 2);
-      ctx.lineTo(textPosition.x + textWidth, textPosition.y + 2);
+      ctx.moveTo(textPosition.x - textWidth / 2, textPosition.y - fontSize / 3);
+      ctx.lineTo(textPosition.x + textWidth / 2, textPosition.y - fontSize / 3);
       ctx.strokeStyle = ctx.fillStyle;
       ctx.lineWidth = 2;
       ctx.stroke();
@@ -73,9 +73,9 @@ const CanvasApp = () => {
       setTextPosition({
         x: centerX - textWidth / 2,
         y: centerY + textHeight / 2,
-    });
-  }
-};
+      });
+    }
+  };
 
   const changeFont = (e) => {
     setHistory([...history, { text, font, fontSize, textPosition, textStyles, textAlign }]);

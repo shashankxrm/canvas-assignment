@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBold, faItalic, faUnderline, faAlignCenter } from '@fortawesome/free-solid-svg-icons';
+import { faBold, faItalic, faStrikethrough, faAlignCenter } from '@fortawesome/free-solid-svg-icons';
 
 const FontStyleToolbar = ({ textStyles, toggleTextStyle, toggleTextAlign, className }) => {
   return (
@@ -19,10 +19,10 @@ const FontStyleToolbar = ({ textStyles, toggleTextStyle, toggleTextAlign, classN
           <FontAwesomeIcon icon={faItalic} className="text-lg" />
         </button>
         <button
-          onClick={() => toggleTextStyle('underline')}
-          className={`bg-transparent text-gray-700 hover:text-gray-900 mx-2 ${textStyles.underline ? 'underline' : ''}`}
+          onClick={() => toggleTextStyle('strikethrough')}
+          className={`bg-transparent text-gray-700 hover:text-gray-900 mx-2 ${textStyles.strikethrough ? 'line-through' : ''}`}
         >
-          <FontAwesomeIcon icon={faUnderline} className="text-lg" />
+          <FontAwesomeIcon icon={faStrikethrough} className="text-lg" />
         </button>
         <button
           onClick={() => toggleTextAlign('center')}

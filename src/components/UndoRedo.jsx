@@ -4,12 +4,14 @@ import { faUndo, faRedo } from '@fortawesome/free-solid-svg-icons';
 
 const UndoRedo = ({ onUndo, onRedo }) => {
   return (
-    <div className="flex space-x-2">
-      <button onClick={onUndo} className="bg-blue-500 text-white p-2 rounded shadow">
-        <FontAwesomeIcon icon={faUndo} />
+    <div className="flex justify-center space-x-4">
+      <button onClick={onUndo} className="flex flex-col items-center bg-transparent text-gray-700 hover:text-gray-900">
+        <FontAwesomeIcon icon={faUndo} className="text-2xl" />
+        <span className="text-xs mt-1">Undo</span>
       </button>
-      <button onClick={onRedo} className="bg-blue-500 text-white p-2 rounded shadow">
-        <FontAwesomeIcon icon={faRedo} />
+      <button onClick={onRedo} className="flex flex-col items-center bg-transparent text-gray-700 hover:text-gray-900">
+        <FontAwesomeIcon icon={faRedo} className="text-2xl" />
+        <span className="text-xs mt-1">Redo</span>
       </button>
     </div>
   );

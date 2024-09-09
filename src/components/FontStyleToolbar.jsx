@@ -1,19 +1,36 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBold, faItalic, faUnderline } from '@fortawesome/free-solid-svg-icons';
+import { faBold, faItalic, faUnderline, faAlignCenter } from '@fortawesome/free-solid-svg-icons';
 
-const FontStyleToolbar = ({ textStyles, toggleTextStyle }) => {
+const FontStyleToolbar = ({ textStyles, toggleTextStyle, toggleTextAlign, className }) => {
   return (
-    <div className="flex space-x-2 mt-4">
-      <button onClick={() => toggleTextStyle('bold')} className={`p-2 rounded ${textStyles.bold ? 'bg-blue-700' : 'bg-blue-500'}`}>
-        <FontAwesomeIcon icon={faBold} className="text-white" />
-      </button>
-      <button onClick={() => toggleTextStyle('italic')} className={`p-2 rounded ${textStyles.italic ? 'bg-blue-700' : 'bg-blue-500'}`}>
-        <FontAwesomeIcon icon={faItalic} className="text-white" />
-      </button>
-      <button onClick={() => toggleTextStyle('underline')} className={`p-2 rounded ${textStyles.underline ? 'bg-blue-700' : 'bg-blue-500'}`}>
-        <FontAwesomeIcon icon={faUnderline} className="text-white" />
-      </button>
+    <div className={`flex items-center ${className}`}>
+      <div className="flex shadow-md rounded-2xl p-1 w-full">
+        <button
+          onClick={() => toggleTextStyle('bold')}
+          className={`bg-transparent text-gray-700 hover:text-gray-900 mx-2 ${textStyles.bold ? 'font-bold' : ''}`}
+        >
+          <FontAwesomeIcon icon={faBold} className="text-lg" />
+        </button>
+        <button
+          onClick={() => toggleTextStyle('italic')}
+          className={`bg-transparent text-gray-700 hover:text-gray-900 mx-2 ${textStyles.italic ? 'italic' : ''}`}
+        >
+          <FontAwesomeIcon icon={faItalic} className="text-lg" />
+        </button>
+        <button
+          onClick={() => toggleTextStyle('underline')}
+          className={`bg-transparent text-gray-700 hover:text-gray-900 mx-2 ${textStyles.underline ? 'underline' : ''}`}
+        >
+          <FontAwesomeIcon icon={faUnderline} className="text-lg" />
+        </button>
+        <button
+          onClick={() => toggleTextAlign('center')}
+          className="bg-transparent text-gray-700 hover:text-gray-900 mx-2"
+        >
+          <FontAwesomeIcon icon={faAlignCenter} className="text-lg" />
+        </button>
+      </div>
     </div>
   );
 };

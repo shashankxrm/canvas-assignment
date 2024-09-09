@@ -19,12 +19,14 @@ const CanvasApp = () => {
     italic: false,
     underline: false,
   });
+  const [textAlign, setTextAlign] = useState('center');
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.font = `${textStyles.bold ? 'bold' : ''} ${textStyles.italic ? 'italic' : ''} ${fontSize}px ${font}`;
+    ctx.textAlign = textAlign;
     ctx.fillText(text, textPosition.x, textPosition.y);
     if (textStyles.underline) {
       const textWidth = ctx.measureText(text).width;
@@ -35,7 +37,7 @@ const CanvasApp = () => {
       ctx.lineWidth = 2;
       ctx.stroke();
     }
-  }, [text, font, fontSize, textPosition, textStyles]);
+  }, [text, font, fontSize, textPosition, textStyles, textAlign]);
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -59,46 +61,52 @@ const CanvasApp = () => {
   const addText = () => {
     const newText = prompt('Enter text:');
     if (newText) {
-      setHistory([...history, { text, font, fontSize, textPosition, textStyles }]);
+      setHistory([...history, { text, font, fontSize, textPosition, textStyles, textAlign }]);
       setText(newText);
     }
   };
 
   const changeFont = (e) => {
-    setHistory([...history, { text, font, fontSize, textPosition, textStyles }]);
+    setHistory([...history, { text, font, fontSize, textPosition, textStyles, textAlign }]);
     setFont(e.target.value);
   };
 
   const changeFontSize = (increment) => {
-    setHistory([...history, { text, font, fontSize, textPosition, textStyles }]);
+    setHistory([...history, { text, font, fontSize, textPosition, textStyles, textAlign }]);
     setFontSize(fontSize + increment);
   };
 
   const handleFontSizeChange = (e) => {
     const newSize = parseInt(e.target.value, 10);
     if (!isNaN(newSize)) {
-      setHistory([...history, { text, font, fontSize, textPosition, textStyles }]);
+      setHistory([...history, { text, font, fontSize, textPosition, textStyles, textAlign }]);
       setFontSize(newSize);
     }
   };
 
   const toggleTextStyle = (style) => {
-    setHistory([...history, { text, font, fontSize, textPosition, textStyles }]);
+    setHistory([...history, { text, font, fontSize, textPosition, textStyles, textAlign }]);
     setTextStyles((prevStyles) => ({
       ...prevStyles,
       [style]: !prevStyles[style],
     }));
   };
 
+  const toggleTextAlign = (align) => {
+    setHistory([...history, { text, font, fontSize, textPosition, textStyles, textAlign }]);
+    setTextAlign(align);
+  };
+
   const undo = () => {
     if (history.length > 0) {
       const lastState = history.pop();
-      setRedoStack([...redoStack, { text, font, fontSize, textPosition, textStyles }]);
+      setRedoStack([...redoStack, { text, font, fontSize, textPosition, textStyles, textAlign }]);
       setText(lastState.text);
       setFont(lastState.font);
       setFontSize(lastState.fontSize);
       setTextPosition(lastState.textPosition);
       setTextStyles(lastState.textStyles);
+      setTextAlign(lastState.textAlign);
       setHistory(history);
     }
   };
@@ -106,12 +114,13 @@ const CanvasApp = () => {
   const redo = () => {
     if (redoStack.length > 0) {
       const lastRedoState = redoStack.pop();
-      setHistory([...history, { text, font, fontSize, textPosition, textStyles }]);
+      setHistory([...history, { text, font, fontSize, textPosition, textStyles, textAlign }]);
       setText(lastRedoState.text);
       setFont(lastRedoState.font);
       setFontSize(lastRedoState.fontSize);
       setTextPosition(lastRedoState.textPosition);
       setTextStyles(lastRedoState.textStyles);
+      setTextAlign(lastRedoState.textAlign);
       setRedoStack(redoStack);
     }
   };
@@ -130,11 +139,13 @@ const CanvasApp = () => {
           className="bg-white border border-gray-300 shadow-md"
         />
       </div>
-      <div className="mt-4 space-y-4">
-        <AddText onAddText={addText} />
-        <FontDropdown font={font} onChangeFont={changeFont} />
-        <FontSizeControl fontSize={fontSize} onIncrement={() => changeFontSize(1)} onDecrement={() => changeFontSize(-1)} onFontSizeChange={handleFontSizeChange} />
-        <FontStyleToolbar textStyles={textStyles} toggleTextStyle={toggleTextStyle} />
+      <div className="flex justify-center space-x-4 mt-4">
+        <FontDropdown font={font} onChangeFont={changeFont} className="w-35 h-12 flex items-center" />
+        <FontSizeControl fontSize={fontSize} onIncrement={() => changeFontSize(1)} onDecrement={() => changeFontSize(-1)} onFontSizeChange={handleFontSizeChange} className="w-22 h-12 flex items-center" />
+        <FontStyleToolbar textStyles={textStyles} toggleTextStyle={toggleTextStyle} toggleTextAlign={toggleTextAlign} className="w-35 h-12 flex items-center" />
+      </div>
+      <div className="flex justify-center mt-4">
+        <AddText onAddText={addText} className="w-1/4 h-12 flex items-center" />
       </div>
     </div>
   );

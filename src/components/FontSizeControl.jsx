@@ -1,18 +1,18 @@
 import React from 'react';
-import Button from './Button';
 
-const FontSizeControl = ({ fontSize, onIncrement, onDecrement, onFontSizeChange }) => {
+const FontSizeControl = ({ fontSize, onIncrement, onDecrement, onFontSizeChange, className }) => {
   return (
-    <div className="inline-flex items-center space-x-2">
-      <Button onClick={onDecrement} className="bg-red-500 px-2 py-1 rounded-l">-</Button>
-      <input
-        type="number"
-        value={fontSize}
-        onChange={onFontSizeChange}
-        className="border-t border-b border-gray-300 px-4 py-2 text-center"
-        style={{ width: '80px' }}
-      />
-      <Button onClick={onIncrement} className="bg-red-500 px-2 py-1 rounded-r">+</Button>
+    <div className={`flex items-center ${className}`}>
+      <div className="flex shadow-md rounded-2xl p-1 w-full">
+        <button onClick={onDecrement} className="bg-transparent text-gray-700 hover:text-gray-900 ml-2 pr-2">-</button>
+        <input
+          type="number"
+          value={fontSize}
+          onChange={onFontSizeChange}
+          className="bg-transparent text-gray-700 h-8 w-11 text-center"
+        />
+        <button onClick={onIncrement} className="bg-transparent text-gray-700 hover:text-gray-900 pr-2">+</button>
+      </div>
     </div>
   );
 };

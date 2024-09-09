@@ -66,7 +66,7 @@ const CanvasApp = () => {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
       const textWidth = ctx.measureText(newText).width;
-      const textHeight = fontSize; // Approximate height based on font size
+      const textHeight = fontSize; 
 
       setHistory([...history, { text, font, fontSize, textPosition, textStyles, textAlign }]);
       setText(newText);
